@@ -16,7 +16,7 @@ export class CreateUserDto {
   @ApiProperty({ example: 'test1@example.com' })
   @Transform(lowerCaseTransformer)
   @IsNotEmpty()
-  @Validate(IsNotExist, ['User'], {
+  @Validate(IsNotExist, ['Users'], {
     message: 'emailAlreadyExists',
   })
   @IsEmail()

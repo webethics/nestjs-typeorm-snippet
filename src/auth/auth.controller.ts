@@ -14,9 +14,6 @@ import {
 import { AuthService } from './auth.service';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthEmailLoginDto } from './dto/auth-email-login.dto';
-import { AuthForgotPasswordDto } from './dto/auth-forgot-password.dto';
-import { AuthConfirmEmailDto } from './dto/auth-confirm-email.dto';
-import { AuthResetPasswordDto } from './dto/auth-reset-password.dto';
 import { AuthUpdateDto } from './dto/auth-update.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthRegisterLoginDto } from './dto/auth-register-login.dto';
@@ -60,13 +57,6 @@ export class AuthController {
     return this.service.register(createUserDto);
   }
 
-  // @Post('email/confirm')
-  // @HttpCode(HttpStatus.NO_CONTENT)
-  // async confirmEmail(
-  //   @Body() confirmEmailDto: AuthConfirmEmailDto,
-  // ): Promise<void> {
-  //   return this.service.confirmEmail(confirmEmailDto.hash);
-  // }
 
   @ApiBearerAuth()
   @SerializeOptions({
@@ -78,27 +68,6 @@ export class AuthController {
   public me(@Request() request): Promise<NullableType<Users>> {
     return this.service.me(request.user);
   }
-
-  // @ApiBearerAuth()
-  // @SerializeOptions({
-  //   groups: ['me'],
-  // })
-  // @Post('refresh')
-  // @UseGuards(AuthGuard('jwt-refresh'))
-  // @HttpCode(HttpStatus.OK)
-  // public refresh(@Request() request): Promise<Omit<LoginResponseType, 'user'>> {
-  //   return this.service.refreshToken(request.user.sessionId);
-  // }
-
-  // @ApiBearerAuth()
-  // @Post('logout')
-  // @UseGuards(AuthGuard('jwt'))
-  // @HttpCode(HttpStatus.NO_CONTENT)
-  // public async logout(@Request() request): Promise<void> {
-  //   await this.service.logout({
-  //     sessionId: request.user.sessionId,
-  //   });
-  // }
 
   @ApiBearerAuth()
   @SerializeOptions({
